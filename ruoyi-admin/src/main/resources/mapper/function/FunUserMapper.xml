@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.function.mapper.FunUserMapper">
+    
+    <resultMap type="FunUser" id="FunUserResult">
+        <result property="id"    column="id"    />
+        <result property="openid"    column="openid"    />
+        <result property="username"    column="username"    />
+        <result property="password"    column="password"    />
+        <result property="trueName"    column="true_name"    />
+        <result property="userid"    column="userid"    />
+        <result property="phone"    column="phone"    />
+        <result property="avatarUrl"    column="avatar_url"    />
+        <result property="userLevel"    column="user_level"    />
+        <result property="dormitory"    column="dormitory"    />
+        <result property="classId"    column="class_id"    />
+    </resultMap>
+
+    <sql id="selectFunUserVo">
+        select id, openid, username, password, true_name, userid, phone, avatar_url, user_level, dormitory, class_id from user
+    </sql>
+
+    <select id="selectFunUserList" parameterType="FunUser" resultMap="FunUserResult">
+        <include refid="selectFunUserVo"/>
+        <where>  
+            <if test="trueName != null  and trueName != ''"> and true_name like concat('%', #{trueName}, '%')</if>
+            <if test="userid != null  and userid != ''"> and userid = #{userid}</if>
+            <if test="userLevel != null  and userLevel != ''"> and user_level = #{userLevel}</if>
+            <if test="dormitory != null  and dormitory != ''"> and dormitory like concat('%', #{dormitory}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectFunUserById" parameterType="Long" resultMap="FunUserResult">
+        <include refid="selectFunUserVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertFunUser" parameterType="FunUser" useGeneratedKeys="true" keyProperty="id">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="openid != null">openid,</if>
+            <if test="username != null and username != ''">username,</if>
+            <if test="password != null and password != ''">password,</if>
+            <if test="trueName != null and trueName != ''">true_name,</if>
+            <if test="userid != null and userid != ''">userid,</if>
+            <if test="phone != null">phone,</if>
+            <if test="avatarUrl != null">avatar_url,</if>
+            <if test="userLevel != null and userLevel != ''">user_level,</if>
+            <if test="dormitory != null">dormitory,</if>
+            <if test="classId != null">class_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="openid != null">#{openid},</if>
+            <if test="username != null and username != ''">#{username},</if>
+            <if test="password != null and password != ''">#{password},</if>
+            <if test="trueName != null and trueName != ''">#{trueName},</if>
+            <if test="userid != null and userid != ''">#{userid},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="avatarUrl != null">#{avatarUrl},</if>
+            <if test="userLevel != null and userLevel != ''">#{userLevel},</if>
+            <if test="dormitory != null">#{dormitory},</if>
+            <if test="classId != null">#{classId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFunUser" parameterType="FunUser">
+        update user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="openid != null">openid = #{openid},</if>
+            <if test="username != null and username != ''">username = #{username},</if>
+            <if test="password != null and password != ''">password = #{password},</if>
+            <if test="trueName != null and trueName != ''">true_name = #{trueName},</if>
+            <if test="userid != null and userid != ''">userid = #{userid},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="avatarUrl != null">avatar_url = #{avatarUrl},</if>
+            <if test="userLevel != null and userLevel != ''">user_level = #{userLevel},</if>
+            <if test="dormitory != null">dormitory = #{dormitory},</if>
+            <if test="classId != null">class_id = #{classId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFunUserById" parameterType="Long">
+        delete from user where id = #{id}
+    </delete>
+
+    <delete id="deleteFunUserByIds" parameterType="String">
+        delete from user where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

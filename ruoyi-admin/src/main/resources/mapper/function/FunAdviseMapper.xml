@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.function.mapper.FunAdviseMapper">
+    
+    <resultMap type="FunAdvise" id="FunAdviseResult">
+        <result property="id"    column="id"    />
+        <result property="stuId"    column="stu_id"    />
+        <result property="describes"    column="describes"    />
+        <result property="category"    column="category"    />
+        <result property="contactobject"    column="contactobject"    />
+        <result property="pushtime"    column="pushtime"    />
+        <result property="path"    column="path"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectFunAdviseVo">
+        select id, stu_id, describes, category, contactobject, pushtime, path, status from advise
+    </sql>
+
+    <select id="selectFunAdviseList" parameterType="FunAdvise" resultMap="FunAdviseResult">
+        <include refid="selectFunAdviseVo"/>
+        <where>  
+            <if test="stuId != null  and stuId != ''"> and stu_id = #{stuId}</if>
+            <if test="describes != null  and describes != ''"> and describes like concat('%', #{describes}, '%')</if>
+            <if test="category != null  and category != ''"> and category = #{category}</if>
+            <if test="contactobject != null  and contactobject != ''"> and contactobject like concat('%', #{contactobject}, '%')</if>
+            <if test="params.beginPushtime != null and params.beginPushtime != '' and params.endPushtime != null and params.endPushtime != ''"> and pushtime between #{params.beginPushtime} and #{params.endPushtime}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectFunAdviseById" parameterType="Long" resultMap="FunAdviseResult">
+        <include refid="selectFunAdviseVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertFunAdvise" parameterType="FunAdvise" useGeneratedKeys="true" keyProperty="id">
+        insert into advise
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="stuId != null">stu_id,</if>
+            <if test="describes != null and describes != ''">describes,</if>
+            <if test="category != null and category != ''">category,</if>
+            <if test="contactobject != null and contactobject != ''">contactobject,</if>
+            <if test="pushtime != null">pushtime,</if>
+            <if test="path != null">path,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="stuId != null">#{stuId},</if>
+            <if test="describes != null and describes != ''">#{describes},</if>
+            <if test="category != null and category != ''">#{category},</if>
+            <if test="contactobject != null and contactobject != ''">#{contactobject},</if>
+            <if test="pushtime != null">#{pushtime},</if>
+            <if test="path != null">#{path},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFunAdvise" parameterType="FunAdvise">
+        update advise
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="stuId != null">stu_id = #{stuId},</if>
+            <if test="describes != null and describes != ''">describes = #{describes},</if>
+            <if test="category != null and category != ''">category = #{category},</if>
+            <if test="contactobject != null and contactobject != ''">contactobject = #{contactobject},</if>
+            <if test="pushtime != null">pushtime = #{pushtime},</if>
+            <if test="path != null">path = #{path},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFunAdviseById" parameterType="Long">
+        delete from advise where id = #{id}
+    </delete>
+
+    <delete id="deleteFunAdviseByIds" parameterType="String">
+        delete from advise where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

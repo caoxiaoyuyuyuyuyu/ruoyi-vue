@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.schoolInfo.mapper.CampusInfoMapper">
+    
+    <resultMap type="CampusInfo" id="CampusInfoResult">
+        <result property="campusId"    column="campus_id"    />
+        <result property="campusName"    column="campus_name"    />
+    </resultMap>
+
+    <resultMap id="CampusInfoGradeInfoResult" type="CampusInfo" extends="CampusInfoResult">
+        <collection property="gradeInfoList" ofType="GradeInfo" column="campus_id" select="selectGradeInfoList" />
+    </resultMap>
+
+    <resultMap type="GradeInfo" id="GradeInfoResult">
+        <result property="gradeId"    column="grade_id"    />
+        <result property="gradeName"    column="grade_name"    />
+        <result property="campusId"    column="campus_id"    />
+    </resultMap>
+
+    <sql id="selectCampusInfoVo">
+        select campus_id, campus_name from campus_info
+    </sql>
+
+    <select id="selectCampusInfoList" parameterType="CampusInfo" resultMap="CampusInfoResult">
+        <include refid="selectCampusInfoVo"/>
+        <where>  
+            <if test="campusId != null "> and campus_id = #{campusId}</if>
+            <if test="campusName != null  and campusName != ''"> and campus_name like concat('%', #{campusName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCampusInfoByCampusId" parameterType="Long" resultMap="CampusInfoGradeInfoResult">
+        select campus_id, campus_name
+        from campus_info
+        where campus_id = #{campusId}
+    </select>
+
+    <select id="selectGradeInfoList" resultMap="GradeInfoResult">
+        select grade_id, grade_name, campus_id
+        from grade_info
+        where campus_id = #{campus_id}
+    </select>
+
+    <insert id="insertCampusInfo" parameterType="CampusInfo" useGeneratedKeys="true" keyProperty="campusId">
+        insert into campus_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="campusName != null and campusName != ''">campus_name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="campusName != null and campusName != ''">#{campusName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCampusInfo" parameterType="CampusInfo">
+        update campus_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="campusName != null and campusName != ''">campus_name = #{campusName},</if>
+        </trim>
+        where campus_id = #{campusId}
+    </update>
+
+    <delete id="deleteCampusInfoByCampusId" parameterType="Long">
+        delete from campus_info where campus_id = #{campusId}
+    </delete>
+
+    <delete id="deleteCampusInfoByCampusIds" parameterType="String">
+        delete from campus_info where campus_id in 
+        <foreach item="campusId" collection="array" open="(" separator="," close=")">
+            #{campusId}
+        </foreach>
+    </delete>
+    
+    <delete id="deleteGradeInfoByCampusIds" parameterType="String">
+        delete from grade_info where campus_id in 
+        <foreach item="campusId" collection="array" open="(" separator="," close=")">
+            #{campusId}
+        </foreach>
+    </delete>
+
+    <delete id="deleteGradeInfoByCampusId" parameterType="Long">
+        delete from grade_info where campus_id = #{campusId}
+    </delete>
+
+    <insert id="batchGradeInfo">
+        insert into grade_info( grade_id, grade_name, campus_id) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            ( #{item.gradeId}, #{item.gradeName}, #{item.campusId})
+        </foreach>
+    </insert>
+</mapper>

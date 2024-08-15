@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.schoolInfo.mapper.CollegeInfoMapper">
+    
+    <resultMap type="CollegeInfo" id="CollegeInfoResult">
+        <result property="collegeId"    column="college_id"    />
+        <result property="collegeName"    column="college_name"    />
+        <result property="gradeId"    column="grade_id"    />
+    </resultMap>
+
+    <resultMap id="CollegeInfoMajorInfoResult" type="CollegeInfo" extends="CollegeInfoResult">
+        <collection property="majorInfoList" ofType="MajorInfo" column="college_id" select="selectMajorInfoList" />
+    </resultMap>
+
+    <resultMap type="MajorInfo" id="MajorInfoResult">
+        <result property="majorId"    column="major_id"    />
+        <result property="majorName"    column="major_name"    />
+        <result property="collegeId"    column="college_id"    />
+    </resultMap>
+
+    <sql id="selectCollegeInfoVo">
+        select college_id, college_name, grade_id from college_info
+    </sql>
+
+    <select id="selectCollegeInfoList" parameterType="CollegeInfo" resultMap="CollegeInfoResult">
+        <include refid="selectCollegeInfoVo"/>
+        <where>  
+            <if test="collegeId != null "> and college_id = #{collegeId}</if>
+            <if test="collegeName != null  and collegeName != ''"> and college_name like concat('%', #{collegeName}, '%')</if>
+            <if test="gradeId != null "> and grade_id = #{gradeId}</if>
+        </where>
+    </select>
+    
+    <select id="selectCollegeInfoByCollegeId" parameterType="Long" resultMap="CollegeInfoMajorInfoResult">
+        select college_id, college_name, grade_id
+        from college_info
+        where college_id = #{collegeId}
+    </select>
+
+    <select id="selectMajorInfoList" resultMap="MajorInfoResult">
+        select major_id, major_name, college_id
+        from major_info
+        where college_id = #{college_id}
+    </select>
+
+    <insert id="insertCollegeInfo" parameterType="CollegeInfo" useGeneratedKeys="true" keyProperty="collegeId">
+        insert into college_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="collegeName != null and collegeName != ''">college_name,</if>
+            <if test="gradeId != null">grade_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="collegeName != null and collegeName != ''">#{collegeName},</if>
+            <if test="gradeId != null">#{gradeId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCollegeInfo" parameterType="CollegeInfo">
+        update college_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="collegeName != null and collegeName != ''">college_name = #{collegeName},</if>
+            <if test="gradeId != null">grade_id = #{gradeId},</if>
+        </trim>
+        where college_id = #{collegeId}
+    </update>
+
+    <delete id="deleteCollegeInfoByCollegeId" parameterType="Long">
+        delete from college_info where college_id = #{collegeId}
+    </delete>
+
+    <delete id="deleteCollegeInfoByCollegeIds" parameterType="String">
+        delete from college_info where college_id in 
+        <foreach item="collegeId" collection="array" open="(" separator="," close=")">
+            #{collegeId}
+        </foreach>
+    </delete>
+    
+    <delete id="deleteMajorInfoByCollegeIds" parameterType="String">
+        delete from major_info where college_id in 
+        <foreach item="collegeId" collection="array" open="(" separator="," close=")">
+            #{collegeId}
+        </foreach>
+    </delete>
+
+    <delete id="deleteMajorInfoByCollegeId" parameterType="Long">
+        delete from major_info where college_id = #{collegeId}
+    </delete>
+
+    <insert id="batchMajorInfo">
+        insert into major_info( major_id, major_name, college_id) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            ( #{item.majorId}, #{item.majorName}, #{item.collegeId})
+        </foreach>
+    </insert>
+</mapper>
