@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.function.mapper.FunNoticeMapper">
+
+    <resultMap type="FunNotice" id="FunNoticeResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="content"    column="content"    />
+        <result property="typeName"    column="type_name"    />
+        <result property="publishTime"    column="publish_time"    />
+        <result property="isActive"    column="is_active"    />
+    </resultMap>
+
+    <sql id="selectFunNoticeVo">
+        select id, title, content, type_name, publish_time, is_active from fun_notice
+    </sql>
+
+    <select id="selectFunNoticeList" parameterType="FunNotice" resultMap="FunNoticeResult">
+        <include refid="selectFunNoticeVo"/>
+        <where>
+            <if test="title != null  and title != ''"> and title like concat('%', #{title}, '%')</if>
+            <if test="typeName != null  and typeName != ''"> and type_name like concat('%', #{typeName}, '%')</if>
+            <if test="params.beginPublishTime != null and params.beginPublishTime != '' and params.endPublishTime != null and params.endPublishTime != ''"> and publish_time between #{params.beginPublishTime} and #{params.endPublishTime}</if>
+            <if test="isActive != null "> and is_active = #{isActive}</if>
+        </where>
+    </select>
+
+    <select id="selectFunNoticeById" parameterType="Long" resultMap="FunNoticeResult">
+        <include refid="selectFunNoticeVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertFunNotice" parameterType="FunNotice" useGeneratedKeys="true" keyProperty="id">
+        insert into fun_notice
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">title,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="typeName != null and typeName != ''">type_name,</if>
+            <if test="publishTime != null">publish_time,</if>
+            <if test="isActive != null">is_active,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="typeName != null and typeName != ''">#{typeName},</if>
+            <if test="publishTime != null">#{publishTime},</if>
+            <if test="isActive != null">#{isActive},</if>
+        </trim>
+    </insert>
+
+    <update id="updateFunNotice" parameterType="FunNotice">
+        update fun_notice
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="typeName != null and typeName != ''">type_name = #{typeName},</if>
+            <if test="publishTime != null">publish_time = #{publishTime},</if>
+            <if test="isActive != null">is_active = #{isActive},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFunNoticeById" parameterType="Long">
+        delete from fun_notice where id = #{id}
+    </delete>
+
+    <delete id="deleteFunNoticeByIds" parameterType="String">
+        delete from fun_notice where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
