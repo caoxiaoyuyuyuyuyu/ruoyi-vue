@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceWrapper;
 import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
 import org.apache.commons.io.FileUtils;
@@ -23,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
@@ -39,6 +42,9 @@ import com.ruoyi.generator.util.GenUtils;
 import com.ruoyi.generator.util.VelocityInitializer;
 import com.ruoyi.generator.util.VelocityUtils;
 import com.ruoyi.framework.datasource.DynamicDataSourceContextHolder;
+
+import static org.springframework.transaction.TransactionDefinition.PROPAGATION_REQUIRES_NEW;
+
 /**
  * 业务 服务层实现
  * 
@@ -54,6 +60,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     @Autowired
     private GenTableColumnMapper genTableColumnMapper;
+
 
     /**
      * 查询业务信息
@@ -173,49 +180,39 @@ public class GenTableServiceImpl implements IGenTableService
      * @param tableList 导入表列表
      */
     @Override
-    @Transactional
-    public void importGenTable(List<GenTable> tableList, String operName)
-    {
-        log.debug("----------importGenTable,tableList: " + JSON.toJSONString(tableList));
-        try
-        {
-            for (GenTable table : tableList)
-            {
+    //一个事务内不能切换数据源
+//    @Transactional(propagation = Propagation.NESTED)
+    public void importGenTable(List<GenTable> tableList, String operName) throws Exception {
+        for (GenTable table : tableList) {
+            int row = importGenTableSigleRow(table, operName);
+            if (row > 0) {
                 String tableName = table.getTableName();
-                log.debug("----------表信息,table: " + tableName);
-                GenUtils.initTable(table, operName);
-                int row = genTableMapper.insertGenTable(table);
-                if (row > 0)
-                {
-                    log.debug("----------插入表的列信息,row: " + row);
-                    // 保存列信息
-
-//                    // 切换到特定数据源
-//                    DynamicDataSourceContextHolder.setDataSourceType(DataSourceType.SLAVE.name());
-//
-//                    log.debug("1数据源： "+DynamicDataSourceContextHolder.getDataSourceType());
-
-                    List<GenTableColumn> genTableColumns = genTableColumnMapper.selectDbTableColumnsByName(tableName);
-                    log.debug("----------列信息,genTableColumns: " + JSON.toJSONString(genTableColumns));
-
-
-//                    // 切换到默认数据源
-//                    DynamicDataSourceContextHolder.setDataSourceType(DataSourceType.MASTER.name());
-//
-//                    log.debug("2数据源： "+DynamicDataSourceContextHolder.getDataSourceType());
-
-                    for (GenTableColumn column : genTableColumns)
-                    {
-                        log.debug("----------列信息,column: " + JSON.toJSONString(column));
-                        GenUtils.initColumnField(column, table);
-                        genTableColumnMapper.insertGenTableColumn(column);
-                    }
-                }
+                // 插入列数据
+                List<GenTableColumn> genTableColumns = genTableColumnMapper.selectDbTableColumnsByName(tableName);
+                importGenTableColumns(table, genTableColumns);
             }
         }
-        catch (Exception e)
+    }
+    @Override
+    //同一个类中的方法调用事务不会生效
+//    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public int importGenTableSigleRow(GenTable table, String operName) {
+        // 初始化表属性
+        GenUtils.initTable(table, operName);
+        // 插入表数据
+        return genTableMapper.insertGenTable(table);
+    }
+
+    @Override
+//    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void importGenTableColumns(GenTable table, List<GenTableColumn> genTableColumns) {
+        for (GenTableColumn column : genTableColumns)
         {
-            throw new ServiceException("导入失败：" + e.getMessage());
+            // 初始化列属性
+            GenUtils.initColumnField(column, table);
+            // 插入列数据
+            genTableColumnMapper.insertGenTableColumn(column);
+
         }
     }
 

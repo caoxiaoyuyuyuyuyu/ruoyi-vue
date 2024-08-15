@@ -6,6 +6,7 @@ import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
 import com.ruoyi.generator.domain.GenTableColumn;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 业务字段 数据层
@@ -20,6 +21,7 @@ public interface GenTableColumnMapper
      * @param tableName 表名称
      * @return 列信息
      */
+    @Transactional
     @DataSource(value = DataSourceType.SLAVE)
     public List<GenTableColumn> selectDbTableColumnsByName(String tableName);
 

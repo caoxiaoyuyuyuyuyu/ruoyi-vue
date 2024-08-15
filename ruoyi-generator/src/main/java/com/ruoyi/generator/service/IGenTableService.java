@@ -3,6 +3,7 @@ package com.ruoyi.generator.service;
 import java.util.List;
 import java.util.Map;
 import com.ruoyi.generator.domain.GenTable;
+import com.ruoyi.generator.domain.GenTableColumn;
 
 /**
  * 业务 服务层
@@ -80,8 +81,11 @@ public interface IGenTableService
      * @param tableList 导入表列表
      * @param operName 操作人员
      */
-    public void importGenTable(List<GenTable> tableList, String operName);
+    public void importGenTable(List<GenTable> tableList, String operName) throws Exception ;
 
+    public int importGenTableSigleRow(GenTable table, String operName);
+
+    public void importGenTableColumns(GenTable table, List<GenTableColumn> genTableColumns);
     /**
      * 预览代码
      * 
