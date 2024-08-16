@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.schoolInfo.mapper.BuildingInfoMapper">
+
+    <resultMap type="BuildingInfo" id="BuildingInfoResult">
+        <result property="buildingId"    column="building_id"    />
+        <result property="buildingName"    column="building_name"    />
+        <result property="floorNum"    column="floor_num"    />
+        <result property="dormitoryNum"    column="dormitory_num"    />
+        <result property="campusId"    column="campus_id"    />
+    </resultMap>
+
+    <sql id="selectBuildingInfoVo">
+        select building_id, building_name, floor_num, dormitory_num, campus_id from building_info
+    </sql>
+
+    <select id="selectBuildingInfoList" parameterType="BuildingInfo" resultMap="BuildingInfoResult">
+        <include refid="selectBuildingInfoVo"/>
+        <where>
+            <if test="buildingName != null  and buildingName != ''"> and building_name like concat('%', #{buildingName}, '%')</if>
+            <if test="params.beginFloorNum != null and params.beginFloorNum != '' and params.endFloorNum != null and params.endFloorNum != ''"> and floor_num between #{params.beginFloorNum} and #{params.endFloorNum}</if>
+            <if test="params.beginDormitoryNum != null and params.beginDormitoryNum != '' and params.endDormitoryNum != null and params.endDormitoryNum != ''"> and dormitory_num between #{params.beginDormitoryNum} and #{params.endDormitoryNum}</if>
+            <if test="campusId != null "> and campus_id = #{campusId}</if>
+        </where>
+    </select>
+
+    <select id="selectBuildingInfoByBuildingId" parameterType="Long" resultMap="BuildingInfoResult">
+        <include refid="selectBuildingInfoVo"/>
+        where building_id = #{buildingId}
+    </select>
+
+    <insert id="insertBuildingInfo" parameterType="BuildingInfo">
+        insert into building_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="buildingId != null">building_id,</if>
+            <if test="buildingName != null and buildingName != ''">building_name,</if>
+            <if test="floorNum != null">floor_num,</if>
+            <if test="dormitoryNum != null">dormitory_num,</if>
+            <if test="campusId != null">campus_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="buildingId != null">#{buildingId},</if>
+            <if test="buildingName != null and buildingName != ''">#{buildingName},</if>
+            <if test="floorNum != null">#{floorNum},</if>
+            <if test="dormitoryNum != null">#{dormitoryNum},</if>
+            <if test="campusId != null">#{campusId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateBuildingInfo" parameterType="BuildingInfo">
+        update building_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="buildingName != null and buildingName != ''">building_name = #{buildingName},</if>
+            <if test="floorNum != null">floor_num = #{floorNum},</if>
+            <if test="dormitoryNum != null">dormitory_num = #{dormitoryNum},</if>
+            <if test="campusId != null">campus_id = #{campusId},</if>
+        </trim>
+        where building_id = #{buildingId}
+    </update>
+
+    <delete id="deleteBuildingInfoByBuildingId" parameterType="Long">
+        delete from building_info where building_id = #{buildingId}
+    </delete>
+
+    <delete id="deleteBuildingInfoByBuildingIds" parameterType="String">
+        delete from building_info where building_id in
+        <foreach item="buildingId" collection="array" open="(" separator="," close=")">
+            #{buildingId}
+        </foreach>
+    </delete>
+</mapper>

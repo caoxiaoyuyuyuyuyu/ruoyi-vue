@@ -12,7 +12,7 @@ import com.ruoyi.function.domain.FunNotice;
  * @author xiaoyu
  * @date 2024-08-14
  */
-@DataSource(value = DataSourceType.MASTER)
+@DataSource(value = DataSourceType.SLAVE)
 public interface FunNoticeMapper
 {
     /**
