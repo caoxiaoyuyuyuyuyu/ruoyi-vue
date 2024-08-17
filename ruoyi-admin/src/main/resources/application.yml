@@ -34,6 +34,7 @@ server:
 # 日志配置
 logging:
   level:
+    #显示所有
     com.ruoyi: debug
     org.springframework: warn
 

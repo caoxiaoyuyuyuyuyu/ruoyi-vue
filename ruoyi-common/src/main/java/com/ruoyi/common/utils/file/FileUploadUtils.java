@@ -3,6 +3,7 @@ package com.ruoyi.common.utils.file;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Objects;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,6 +15,7 @@ import com.ruoyi.common.exception.file.InvalidExtensionException;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.uuid.Seq;
+
 
 /**
  * 文件上传工具类
