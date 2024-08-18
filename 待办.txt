@@ -1,2 +1,3 @@
 事务多数据源切换
 跨域资源共享，添加响应头，需要修改Result类（controller返回ResponseEntity）
+nonono 已经添加了跨域的全局配置
