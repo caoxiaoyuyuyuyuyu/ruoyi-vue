@@ -9,7 +9,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 投诉与建议对象 advise
  * 
  * @author xiaoyu
- * @date 2024-08-15
+ * @date 2024-08-20
  */
 public class FunAdvise extends BaseEntity
 {

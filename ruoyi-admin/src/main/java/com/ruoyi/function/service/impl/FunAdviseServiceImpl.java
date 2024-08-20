@@ -11,7 +11,7 @@ import com.ruoyi.function.service.IFunAdviseService;
  * 投诉与建议Service业务层处理
  * 
  * @author xiaoyu
- * @date 2024-08-15
+ * @date 2024-08-20
  */
 @Service
 public class FunAdviseServiceImpl implements IFunAdviseService 

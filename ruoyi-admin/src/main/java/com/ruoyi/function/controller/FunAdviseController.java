@@ -25,7 +25,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * 投诉与建议Controller
  * 
  * @author xiaoyu
- * @date 2024-08-15
+ * @date 2024-08-20
  */
 @RestController
 @RequestMapping("/function/fun_advise")

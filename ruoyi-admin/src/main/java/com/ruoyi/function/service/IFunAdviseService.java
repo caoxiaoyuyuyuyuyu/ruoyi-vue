@@ -7,7 +7,7 @@ import com.ruoyi.function.domain.FunAdvise;
  * 投诉与建议Service接口
  * 
  * @author xiaoyu
- * @date 2024-08-15
+ * @date 2024-08-20
  */
 public interface IFunAdviseService 
 {

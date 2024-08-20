@@ -10,7 +10,7 @@ import com.ruoyi.function.domain.FunAdvise;
  * 投诉与建议Mapper接口
  * 
  * @author xiaoyu
- * @date 2024-08-15
+ * @date 2024-08-20
  */
 @DataSource(value = DataSourceType.SLAVE)
 public interface FunAdviseMapper 
