@@ -36,6 +36,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectFunUserVo"/>
         where id = #{id}
     </select>
+    <select id="selectFunUserByUserid" parameterType="String" resultMap="FunUserResult">
+        <include refid="selectFunUserVo"/>
+        where userid = #{userid}
+    </select>
 
     <insert id="insertFunUser" parameterType="FunUser" useGeneratedKeys="true" keyProperty="id">
         insert into user

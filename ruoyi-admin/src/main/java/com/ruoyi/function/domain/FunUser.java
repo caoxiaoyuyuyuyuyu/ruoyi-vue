@@ -19,7 +19,7 @@ public class FunUser extends BaseEntity
     private Long id;
 
     /** openid */
-    @Excel(name = "openid")
+    @Excel(name = "openid", type = Excel.Type.EXPORT)
     private String openid;
 
     /** 用户名 */
@@ -42,11 +42,11 @@ public class FunUser extends BaseEntity
     private String phone;
 
     /** 头像 */
-    @Excel(name = "头像")
+    @Excel(name = "头像", type = Excel.Type.EXPORT)
     private String avatarUrl;
 
     /** 权限等级 */
-    @Excel(name = "权限等级")
+    @Excel(name = "权限等级", readConverterExp = "2=学生，1=教师，0=管理员")
     private String userLevel;
 
     /** 宿舍 */

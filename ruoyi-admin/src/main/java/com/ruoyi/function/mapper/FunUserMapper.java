@@ -24,6 +24,14 @@ public interface FunUserMapper
     public FunUser selectFunUserById(Long id);
 
     /**
+     * 查询学生信息
+     *
+     * @param userid 学生信息id
+     * @return 学生信息
+     */
+     public FunUser selectFunUserByUserid(String userid);
+
+    /**
      * 查询学生信息列表
      * 
      * @param funUser 学生信息

@@ -1,6 +1,8 @@
 package com.ruoyi.function.service;
 
 import java.util.List;
+
+import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.function.domain.FunUser;
 
 /**
@@ -58,4 +60,13 @@ public interface IFunUserService
      * @return 结果
      */
     public int deleteFunUserById(Long id);
+    /**
+     * 导入用户数据
+     *
+     * @param userList 用户数据列表
+     * @param isUpdateSupport 是否更新支持，如果已存在，则进行更新数据
+     * @return 结果
+     */
+    public String importUser(List<FunUser> userList, Boolean isUpdateSupport);
+
 }

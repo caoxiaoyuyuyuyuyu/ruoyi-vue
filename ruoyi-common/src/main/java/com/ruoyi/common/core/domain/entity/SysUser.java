@@ -22,6 +22,7 @@ public class SysUser extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 用户ID */
+    /*导出到Excel时，该字段名为“用户序号”，类型为数值，提示信息为“用户编号”，仅在导出时生效。*/
     @Excel(name = "用户序号", type = Type.EXPORT, cellType = ColumnType.NUMERIC, prompt = "用户编号")
     private Long userId;
 

@@ -128,3 +128,7 @@ xss:
   excludes: /system/notice
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
+defaults:
+  password: "123456"
+  userLevel: "2"
+  avatarUrl: "https://c-ssl.duitang.com/uploads/item/201602/04/20160204001032_CBWJF.jpeg"

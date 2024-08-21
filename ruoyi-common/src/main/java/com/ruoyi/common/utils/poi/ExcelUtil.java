@@ -351,6 +351,7 @@ public class ExcelUtil<T>
         }
         // 获取最后一个非空行的行下标，比如总行数为n，则返回的为n-1
         int rows = sheet.getLastRowNum();
+        log.debug("获取总行数:{}", rows);
         if (rows > 0)
         {
             // 定义一个map用于存放excel列的序号和field.
@@ -384,6 +385,7 @@ public class ExcelUtil<T>
             }
             for (int i = titleNum + 1; i <= rows; i++)
             {
+                log.debug("处理行:{}", i);
                 // 从第2行开始取数据,默认第一行是表头.
                 Row row = sheet.getRow(i);
                 // 判断当前行是否是空行
@@ -394,6 +396,7 @@ public class ExcelUtil<T>
                 T entity = null;
                 for (Map.Entry<Integer, Object[]> entry : fieldsMap.entrySet())
                 {
+                    log.debug("处理列:{}:{}", entry.getKey(), entry.getValue());
                     Object val = this.getCellValue(row, entry.getKey());
 
                     // 如果不存在实例则新建.
