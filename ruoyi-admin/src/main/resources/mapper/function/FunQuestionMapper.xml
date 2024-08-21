@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.function.mapper.FunQuestionMapper">
+    
+    <resultMap type="FunQuestion" id="FunQuestionResult">
+        <result property="id"    column="id"    />
+        <result property="type"    column="type"    />
+        <result property="name"    column="name"    />
+        <result property="description"    column="description"    />
+        <result property="content"    column="content"    />
+        <result property="questionnaireId"    column="questionnaire_id"    />
+    </resultMap>
+
+    <sql id="selectFunQuestionVo">
+        select id, type, name, description, content, questionnaire_id from question
+    </sql>
+
+    <select id="selectFunQuestionList" parameterType="FunQuestion" resultMap="FunQuestionResult">
+        <include refid="selectFunQuestionVo"/>
+        <where>  
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="questionnaireId != null "> and questionnaire_id = #{questionnaireId}</if>
+        </where>
+    </select>
+    
+    <select id="selectFunQuestionById" parameterType="Long" resultMap="FunQuestionResult">
+        <include refid="selectFunQuestionVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertFunQuestion" parameterType="FunQuestion" useGeneratedKeys="true" keyProperty="id">
+        insert into question
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="type != null and type != ''">type,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="description != null">description,</if>
+            <if test="content != null">content,</if>
+            <if test="questionnaireId != null">questionnaire_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="type != null and type != ''">#{type},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="description != null">#{description},</if>
+            <if test="content != null">#{content},</if>
+            <if test="questionnaireId != null">#{questionnaireId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFunQuestion" parameterType="FunQuestion">
+        update question
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="type != null and type != ''">type = #{type},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="questionnaireId != null">questionnaire_id = #{questionnaireId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFunQuestionById" parameterType="Long">
+        delete from question where id = #{id}
+    </delete>
+
+    <delete id="deleteFunQuestionByIds" parameterType="String">
+        delete from question where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

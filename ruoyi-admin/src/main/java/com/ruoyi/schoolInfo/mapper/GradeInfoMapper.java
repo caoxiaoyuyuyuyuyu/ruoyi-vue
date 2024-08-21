@@ -64,6 +64,7 @@ public interface GradeInfoMapper
      */
     public int deleteGradeInfoByGradeIds(Long[] gradeIds);
 
+    public List<Long> selectCollegeInfoByGradeIds(Long[] gradeIds);
     /**
      * 批量删除学院信息
      * 
@@ -88,4 +89,5 @@ public interface GradeInfoMapper
      * @return 结果
      */
     public int deleteCollegeInfoByGradeId(Long gradeId);
+
 }

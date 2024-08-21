@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.schoolInfo.mapper.CampusInfoMapper">
-    
+
     <resultMap type="CampusInfo" id="CampusInfoResult">
         <result property="campusId"    column="campus_id"    />
         <result property="campusName"    column="campus_name"    />
@@ -25,12 +25,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectCampusInfoList" parameterType="CampusInfo" resultMap="CampusInfoResult">
         <include refid="selectCampusInfoVo"/>
-        <where>  
+        <where>
             <if test="campusId != null "> and campus_id = #{campusId}</if>
             <if test="campusName != null  and campusName != ''"> and campus_name like concat('%', #{campusName}, '%')</if>
         </where>
     </select>
-    
+
     <select id="selectCampusInfoByCampusId" parameterType="Long" resultMap="CampusInfoGradeInfoResult">
         select campus_id, campus_name
         from campus_info
@@ -66,14 +66,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteCampusInfoByCampusIds" parameterType="String">
-        delete from campus_info where campus_id in 
+        delete from campus_info where campus_id in
         <foreach item="campusId" collection="array" open="(" separator="," close=")">
             #{campusId}
         </foreach>
     </delete>
-    
+
+    <select id="selectGradeInfoByCampusIds" parameterType="java.util.List" resultType="Long">
+        select grade_id from grade_info where campus_id in
+        <foreach item="campusId" collection="array" open="(" separator="," close=")">
+            #{campusId}
+        </foreach>
+    </select>
+
     <delete id="deleteGradeInfoByCampusIds" parameterType="String">
-        delete from grade_info where campus_id in 
+        delete from grade_info where campus_id in
         <foreach item="campusId" collection="array" open="(" separator="," close=")">
             #{campusId}
         </foreach>

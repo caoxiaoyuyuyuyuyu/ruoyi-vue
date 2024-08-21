@@ -64,6 +64,7 @@ public interface CollegeInfoMapper
      */
     public int deleteCollegeInfoByCollegeIds(Long[] collegeIds);
 
+    public List<Long> selectmajorInfoByCollegeIds(Long[] collegeIds);
     /**
      * 批量删除专业信息
      * 
@@ -88,4 +89,5 @@ public interface CollegeInfoMapper
      * @return 结果
      */
     public int deleteMajorInfoByCollegeId(Long collegeId);
+
 }

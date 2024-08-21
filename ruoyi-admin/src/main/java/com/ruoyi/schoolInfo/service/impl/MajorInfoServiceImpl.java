@@ -1,9 +1,11 @@
 package com.ruoyi.schoolInfo.service.impl;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
+import com.ruoyi.schoolInfo.service.IClassInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -76,8 +78,8 @@ public class MajorInfoServiceImpl implements IMajorInfoService
     @Override
     public int updateMajorInfo(MajorInfo majorInfo)
     {
-        majorInfoMapper.deleteClassInfoByMajorId(majorInfo.getMajorId());
-        insertClassInfo(majorInfo);
+//        majorInfoMapper.deleteClassInfoByMajorId(majorInfo.getMajorId());
+//        insertClassInfo(majorInfo);
         return majorInfoMapper.updateMajorInfo(majorInfo);
     }
 
@@ -91,6 +93,7 @@ public class MajorInfoServiceImpl implements IMajorInfoService
     @Override
     public int deleteMajorInfoByMajorIds(Long[] majorIds)
     {
+        System.out.println("**majorIds"+ Arrays.toString(majorIds));
         majorInfoMapper.deleteClassInfoByMajorIds(majorIds);
         return majorInfoMapper.deleteMajorInfoByMajorIds(majorIds);
     }

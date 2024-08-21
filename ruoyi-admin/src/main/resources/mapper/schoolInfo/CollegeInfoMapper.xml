@@ -44,6 +44,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from major_info
         where college_id = #{college_id}
     </select>
+    <select id="selectmajorInfoByCollegeIds" parameterType="List" resultType="Long">
+        select major_id
+        from major_info
+        where college_id in
+        <foreach item="collegeId" collection="array" open="(" separator="," close=")">
+            #{collegeId}
+        </foreach>
+    </select>
 
     <insert id="insertCollegeInfo" parameterType="CollegeInfo" useGeneratedKeys="true" keyProperty="collegeId">
         insert into college_info

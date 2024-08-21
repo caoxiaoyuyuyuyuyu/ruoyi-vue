@@ -44,6 +44,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from college_info
         where grade_id = #{grade_id}
     </select>
+    <select id="selectCollegeInfoByGradeIds" parameterType="java.util.List" resultType="Long">
+        select college_id
+        from college_info
+        where grade_id in
+        <foreach item="gradeId" collection="array" open="(" separator="," close=")">
+            #{gradeId}
+        </foreach>
+    </select>
 
     <insert id="insertGradeInfo" parameterType="GradeInfo" useGeneratedKeys="true" keyProperty="gradeId">
         insert into grade_info

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
+import com.ruoyi.schoolInfo.service.IGradeInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -13,6 +14,8 @@ import com.ruoyi.schoolInfo.domain.GradeInfo;
 import com.ruoyi.schoolInfo.mapper.CampusInfoMapper;
 import com.ruoyi.schoolInfo.domain.CampusInfo;
 import com.ruoyi.schoolInfo.service.ICampusInfoService;
+
+import static org.apache.commons.lang3.ArrayUtils.toArray;
 
 /**
  * 学校信息Service业务层处理
@@ -27,6 +30,8 @@ public class CampusInfoServiceImpl implements ICampusInfoService
     @Autowired
     private CampusInfoMapper campusInfoMapper;
 
+    @Autowired
+    private IGradeInfoService gradeInfoService;
     /**
      * 查询学校信息
      * 
@@ -76,8 +81,8 @@ public class CampusInfoServiceImpl implements ICampusInfoService
     @Override
     public int updateCampusInfo(CampusInfo campusInfo)
     {
-        campusInfoMapper.deleteGradeInfoByCampusId(campusInfo.getCampusId());
-        insertGradeInfo(campusInfo);
+//        campusInfoMapper.deleteGradeInfoByCampusId(campusInfo.getCampusId());
+//        insertGradeInfo(campusInfo);
         return campusInfoMapper.updateCampusInfo(campusInfo);
     }
 
@@ -91,7 +96,9 @@ public class CampusInfoServiceImpl implements ICampusInfoService
     @Override
     public int deleteCampusInfoByCampusIds(Long[] campusIds)
     {
-        campusInfoMapper.deleteGradeInfoByCampusIds(campusIds);
+        List<Long> gradeInfoList = campusInfoMapper.selectGradeInfoByCampusIds(campusIds);
+        System.out.println("**gradeIdList"+gradeInfoList.toString());
+        gradeInfoService.deleteGradeInfoByGradeIds(gradeInfoList.toArray(new Long[0]));
         return campusInfoMapper.deleteCampusInfoByCampusIds(campusIds);
     }
 

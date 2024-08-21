@@ -6,6 +6,8 @@ import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
 import com.ruoyi.schoolInfo.domain.CampusInfo;
 import com.ruoyi.schoolInfo.domain.GradeInfo;
+import org.apache.ibatis.annotations.Mapper;
+import org.aspectj.lang.annotation.Before;
 
 /**
  * 学校信息Mapper接口
@@ -13,6 +15,7 @@ import com.ruoyi.schoolInfo.domain.GradeInfo;
  * @author xiaoyu
  * @date 2024-08-15
  */
+@Mapper
 @DataSource(value = DataSourceType.SLAVE)
 public interface CampusInfoMapper 
 {
@@ -70,8 +73,17 @@ public interface CampusInfoMapper
      * @param campusIds 需要删除的数据主键集合
      * @return 结果
      */
+    public List<Long> selectGradeInfoByCampusIds(Long[] campusIds);
+
+    /**
+     * 批量查询年级信息
+     *
+     * @param campusIds 需要删除的数据主键集合
+     * @return 结果
+     */
     public int deleteGradeInfoByCampusIds(Long[] campusIds);
-    
+
+
     /**
      * 批量新增年级信息
      * 

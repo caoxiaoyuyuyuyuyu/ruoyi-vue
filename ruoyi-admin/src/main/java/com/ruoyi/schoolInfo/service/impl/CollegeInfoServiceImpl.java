@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
+import com.ruoyi.schoolInfo.service.IMajorInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -26,6 +27,9 @@ public class CollegeInfoServiceImpl implements ICollegeInfoService
 {
     @Autowired
     private CollegeInfoMapper collegeInfoMapper;
+
+    @Autowired
+    private IMajorInfoService majorInfoService;
 
     /**
      * 查询学院信息
@@ -76,8 +80,8 @@ public class CollegeInfoServiceImpl implements ICollegeInfoService
     @Override
     public int updateCollegeInfo(CollegeInfo collegeInfo)
     {
-        collegeInfoMapper.deleteMajorInfoByCollegeId(collegeInfo.getCollegeId());
-        insertMajorInfo(collegeInfo);
+//        collegeInfoMapper.deleteMajorInfoByCollegeId(collegeInfo.getCollegeId());
+//        insertMajorInfo(collegeInfo);
         return collegeInfoMapper.updateCollegeInfo(collegeInfo);
     }
 
@@ -91,7 +95,9 @@ public class CollegeInfoServiceImpl implements ICollegeInfoService
     @Override
     public int deleteCollegeInfoByCollegeIds(Long[] collegeIds)
     {
-        collegeInfoMapper.deleteMajorInfoByCollegeIds(collegeIds);
+        List<Long> majorInfoList = collegeInfoMapper.selectmajorInfoByCollegeIds(collegeIds);
+        System.out.println("**majorInfoList"+majorInfoList.toString());
+        majorInfoService.deleteMajorInfoByMajorIds(majorInfoList.toArray(new Long[0]));
         return collegeInfoMapper.deleteCollegeInfoByCollegeIds(collegeIds);
     }
 
