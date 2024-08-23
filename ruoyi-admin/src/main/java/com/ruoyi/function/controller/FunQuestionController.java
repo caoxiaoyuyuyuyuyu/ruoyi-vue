@@ -2,6 +2,8 @@ package com.ruoyi.function.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.function.domain.QuesAnswerStatistics;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,6 +46,22 @@ public class FunQuestionController extends BaseController
         startPage();
         List<FunQuestion> list = funQuestionService.selectFunQuestionList(funQuestion);
         return getDataTable(list);
+    }
+
+    /**
+     * 查询问卷中的问题列表
+     */
+    @PreAuthorize("@ss.hasPermi('function:fun_question_statistics:chart')")
+    @GetMapping("/chart/{id}")
+    public AjaxResult list(@PathVariable("id") Long id)
+    {
+        logger.debug("单个问卷list统计数据");
+//        startPage();
+        FunQuestion funQuestion = new FunQuestion();
+        funQuestion.setQuestionnaireId(id);
+        List<FunQuestion> list = funQuestionService.selectFunQuestionList(funQuestion);
+//        return getDataTable(list);
+        return success(list);
     }
 
     /**

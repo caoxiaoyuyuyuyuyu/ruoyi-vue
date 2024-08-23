@@ -23,6 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="type != null  and type != ''"> and type = #{type}</if>
             <if test="questionnaireId != null "> and questionnaire_id = #{questionnaireId}</if>
         </where>
+        ORDER BY questionnaire_id ASC, id ASC
     </select>
     
     <select id="selectFunQuestionById" parameterType="Long" resultMap="FunQuestionResult">

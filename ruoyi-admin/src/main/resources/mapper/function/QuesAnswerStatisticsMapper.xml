@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.function.mapper.QuesAnswerStatisticsMapper">
+    
+    <resultMap type="QuesAnswerStatistics" id="QuesAnswerStatisticsResult">
+        <result property="id"    column="id"    />
+        <result property="naireId"    column="naire_id"    />
+        <result property="questionId"    column="question_id"    />
+        <result property="answerType"    column="answer_type"    />
+        <result property="choiceCount"    column="choice_count"    />
+        <result property="createdAt"    column="created_at"    />
+        <result property="updatedAt"    column="updated_at"    />
+    </resultMap>
+
+    <sql id="selectQuesAnswerStatisticsVo">
+        select id, naire_id, question_id, answer_type, choice_count, created_at, updated_at from answer_statistics
+    </sql>
+
+    <select id="selectQuesAnswerStatisticsList" parameterType="QuesAnswerStatistics" resultMap="QuesAnswerStatisticsResult">
+        <include refid="selectQuesAnswerStatisticsVo"/>
+        <where>  
+            <if test="naireId != null "> and naire_id = #{naireId}</if>
+            <if test="questionId != null "> and question_id = #{questionId}</if>
+            <if test="answerType != null  and answerType != ''"> and answer_type = #{answerType}</if>
+        </where>
+        ORDER BY naire_id ASC, question_id ASC
+    </select>
+    
+    <select id="selectQuesAnswerStatisticsById" parameterType="Long" resultMap="QuesAnswerStatisticsResult">
+        <include refid="selectQuesAnswerStatisticsVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertQuesAnswerStatistics" parameterType="QuesAnswerStatistics" useGeneratedKeys="true" keyProperty="id">
+        insert into answer_statistics
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="naireId != null">naire_id,</if>
+            <if test="questionId != null">question_id,</if>
+            <if test="answerType != null and answerType != ''">answer_type,</if>
+            <if test="choiceCount != null">choice_count,</if>
+            <if test="createdAt != null">created_at,</if>
+            <if test="updatedAt != null">updated_at,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="naireId != null">#{naireId},</if>
+            <if test="questionId != null">#{questionId},</if>
+            <if test="answerType != null and answerType != ''">#{answerType},</if>
+            <if test="choiceCount != null">#{choiceCount},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+            <if test="updatedAt != null">#{updatedAt},</if>
+         </trim>
+    </insert>
+
+    <update id="updateQuesAnswerStatistics" parameterType="QuesAnswerStatistics">
+        update answer_statistics
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="naireId != null">naire_id = #{naireId},</if>
+            <if test="questionId != null">question_id = #{questionId},</if>
+            <if test="answerType != null and answerType != ''">answer_type = #{answerType},</if>
+            <if test="choiceCount != null">choice_count = #{choiceCount},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+            <if test="updatedAt != null">updated_at = #{updatedAt},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteQuesAnswerStatisticsById" parameterType="Long">
+        delete from answer_statistics where id = #{id}
+    </delete>
+
+    <delete id="deleteQuesAnswerStatisticsByIds" parameterType="String">
+        delete from answer_statistics where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
