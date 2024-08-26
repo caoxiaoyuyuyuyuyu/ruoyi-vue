@@ -29,7 +29,7 @@ public class QuesAnswerStatistics extends BaseEntity
     private Long questionId;
 
     /** 问题类型 */
-    @Excel(name = "问题类型")
+    @Excel(name = "问题类型", readConverterExp = "3=问答,2=多选,1=单选")
     private String answerType;
 
     /** 选项对应数量 */

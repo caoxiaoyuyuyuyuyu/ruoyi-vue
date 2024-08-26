@@ -24,7 +24,7 @@ public class FunQuestionnaire extends BaseEntity
     private String anonymous;
 
     /** 类型 */
-    @Excel(name = "类型")
+    @Excel(name = "类型", readConverterExp = "0=默认,1=类型一,2=类型二,3=类型三")
     private String type;
 
     /** 名称 */

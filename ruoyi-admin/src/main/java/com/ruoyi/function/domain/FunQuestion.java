@@ -19,7 +19,7 @@ public class FunQuestion extends BaseEntity
     private Long id;
 
     /** 问题类型，多选单选等 */
-    @Excel(name = "问题类型，多选单选等")
+    @Excel(name = "问题类型", readConverterExp = "3=问答,2=多选,1=单选")
     private String type;
 
     /** 问题名称 */
@@ -35,7 +35,7 @@ public class FunQuestion extends BaseEntity
     private String content;
 
     /** 问题所属问卷的id */
-    @Excel(name = "问题所属问卷的id")
+    @Excel(name = "所属问卷id")
     private Long questionnaireId;
 
     public void setId(Long id) 
