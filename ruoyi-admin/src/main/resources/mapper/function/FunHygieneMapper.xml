@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.function.mapper.FunHygieneMapper">
+    
+    <resultMap type="FunHygiene" id="FunHygieneResult">
+        <result property="id"    column="id"    />
+        <result property="Dormitoryid"    column="Dormitoryid"    />
+        <result property="FirstRank"    column="FirstRank"    />
+        <result property="SecondRank"    column="SecondRank"    />
+        <result property="ThirdRank"    column="ThirdRank"    />
+        <result property="FourthRank"    column="FourthRank"    />
+        <result property="FifthRank"    column="FifthRank"    />
+        <result property="SixthRank"    column="SixthRank"    />
+        <result property="SeventhRank"    column="SeventhRank"    />
+        <result property="EighthRank"    column="EighthRank"    />
+        <result property="NinthRank"    column="NinthRank"    />
+        <result property="TenthRank"    column="TenthRank"    />
+        <result property="EleventhRank"    column="EleventhRank"    />
+        <result property="TwelfthRank"    column="TwelfthRank"    />
+        <result property="ThirteenthRank"    column="ThirteenthRank"    />
+        <result property="FourteenthRank"    column="FourteenthRank"    />
+        <result property="FifteenthRank"    column="FifteenthRank"    />
+        <result property="SixteenthRank"    column="SixteenthRank"    />
+        <result property="SeventeenthRank"    column="SeventeenthRank"    />
+        <result property="EighteenthRank"    column="EighteenthRank"    />
+        <result property="NineteenthRank"    column="NineteenthRank"    />
+    </resultMap>
+
+    <sql id="selectFunHygieneVo">
+        select id, Dormitoryid, FirstRank, SecondRank, ThirdRank, FourthRank, FifthRank, SixthRank, SeventhRank, EighthRank, NinthRank, TenthRank, EleventhRank, TwelfthRank, ThirteenthRank, FourteenthRank, FifteenthRank, SixteenthRank, SeventeenthRank, EighteenthRank, NineteenthRank from hygiene
+    </sql>
+
+    <select id="selectFunHygieneList" parameterType="FunHygiene" resultMap="FunHygieneResult">
+        <include refid="selectFunHygieneVo"/>
+        <where>  
+            <if test="Dormitoryid != null  and Dormitoryid != ''"> and Dormitoryid like concat('%', #{Dormitoryid}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectFunHygieneById" parameterType="Long" resultMap="FunHygieneResult">
+        <include refid="selectFunHygieneVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertFunHygiene" parameterType="FunHygiene" useGeneratedKeys="true" keyProperty="id">
+        insert into hygiene
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="Dormitoryid != null and Dormitoryid != ''">Dormitoryid,</if>
+            <if test="FirstRank != null">FirstRank,</if>
+            <if test="SecondRank != null">SecondRank,</if>
+            <if test="ThirdRank != null">ThirdRank,</if>
+            <if test="FourthRank != null">FourthRank,</if>
+            <if test="FifthRank != null">FifthRank,</if>
+            <if test="SixthRank != null">SixthRank,</if>
+            <if test="SeventhRank != null">SeventhRank,</if>
+            <if test="EighthRank != null">EighthRank,</if>
+            <if test="NinthRank != null">NinthRank,</if>
+            <if test="TenthRank != null">TenthRank,</if>
+            <if test="EleventhRank != null">EleventhRank,</if>
+            <if test="TwelfthRank != null">TwelfthRank,</if>
+            <if test="ThirteenthRank != null">ThirteenthRank,</if>
+            <if test="FourteenthRank != null">FourteenthRank,</if>
+            <if test="FifteenthRank != null">FifteenthRank,</if>
+            <if test="SixteenthRank != null">SixteenthRank,</if>
+            <if test="SeventeenthRank != null">SeventeenthRank,</if>
+            <if test="EighteenthRank != null">EighteenthRank,</if>
+            <if test="NineteenthRank != null">NineteenthRank,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="Dormitoryid != null and Dormitoryid != ''">#{Dormitoryid},</if>
+            <if test="FirstRank != null">#{FirstRank},</if>
+            <if test="SecondRank != null">#{SecondRank},</if>
+            <if test="ThirdRank != null">#{ThirdRank},</if>
+            <if test="FourthRank != null">#{FourthRank},</if>
+            <if test="FifthRank != null">#{FifthRank},</if>
+            <if test="SixthRank != null">#{SixthRank},</if>
+            <if test="SeventhRank != null">#{SeventhRank},</if>
+            <if test="EighthRank != null">#{EighthRank},</if>
+            <if test="NinthRank != null">#{NinthRank},</if>
+            <if test="TenthRank != null">#{TenthRank},</if>
+            <if test="EleventhRank != null">#{EleventhRank},</if>
+            <if test="TwelfthRank != null">#{TwelfthRank},</if>
+            <if test="ThirteenthRank != null">#{ThirteenthRank},</if>
+            <if test="FourteenthRank != null">#{FourteenthRank},</if>
+            <if test="FifteenthRank != null">#{FifteenthRank},</if>
+            <if test="SixteenthRank != null">#{SixteenthRank},</if>
+            <if test="SeventeenthRank != null">#{SeventeenthRank},</if>
+            <if test="EighteenthRank != null">#{EighteenthRank},</if>
+            <if test="NineteenthRank != null">#{NineteenthRank},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFunHygiene" parameterType="FunHygiene">
+        update hygiene
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="Dormitoryid != null and Dormitoryid != ''">Dormitoryid = #{Dormitoryid},</if>
+            <if test="FirstRank != null">FirstRank = #{FirstRank},</if>
+            <if test="SecondRank != null">SecondRank = #{SecondRank},</if>
+            <if test="ThirdRank != null">ThirdRank = #{ThirdRank},</if>
+            <if test="FourthRank != null">FourthRank = #{FourthRank},</if>
+            <if test="FifthRank != null">FifthRank = #{FifthRank},</if>
+            <if test="SixthRank != null">SixthRank = #{SixthRank},</if>
+            <if test="SeventhRank != null">SeventhRank = #{SeventhRank},</if>
+            <if test="EighthRank != null">EighthRank = #{EighthRank},</if>
+            <if test="NinthRank != null">NinthRank = #{NinthRank},</if>
+            <if test="TenthRank != null">TenthRank = #{TenthRank},</if>
+            <if test="EleventhRank != null">EleventhRank = #{EleventhRank},</if>
+            <if test="TwelfthRank != null">TwelfthRank = #{TwelfthRank},</if>
+            <if test="ThirteenthRank != null">ThirteenthRank = #{ThirteenthRank},</if>
+            <if test="FourteenthRank != null">FourteenthRank = #{FourteenthRank},</if>
+            <if test="FifteenthRank != null">FifteenthRank = #{FifteenthRank},</if>
+            <if test="SixteenthRank != null">SixteenthRank = #{SixteenthRank},</if>
+            <if test="SeventeenthRank != null">SeventeenthRank = #{SeventeenthRank},</if>
+            <if test="EighteenthRank != null">EighteenthRank = #{EighteenthRank},</if>
+            <if test="NineteenthRank != null">NineteenthRank = #{NineteenthRank},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFunHygieneById" parameterType="Long">
+        delete from hygiene where id = #{id}
+    </delete>
+
+    <delete id="deleteFunHygieneByIds" parameterType="String">
+        delete from hygiene where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
