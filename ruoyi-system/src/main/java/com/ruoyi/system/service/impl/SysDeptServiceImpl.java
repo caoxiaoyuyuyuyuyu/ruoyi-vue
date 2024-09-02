@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.common.annotation.DataScope;
@@ -29,6 +32,7 @@ import com.ruoyi.system.service.ISysDeptService;
 @Service
 public class SysDeptServiceImpl implements ISysDeptService
 {
+    private static final Logger log = LoggerFactory.getLogger(SysDeptServiceImpl.class);
     @Autowired
     private SysDeptMapper deptMapper;
 
@@ -45,6 +49,7 @@ public class SysDeptServiceImpl implements ISysDeptService
     @DataScope(deptAlias = "d")
     public List<SysDept> selectDeptList(SysDept dept)
     {
+        log.info("**{}",deptMapper.selectDeptList(dept).toString());
         return deptMapper.selectDeptList(dept);
     }
 
