@@ -7,7 +7,7 @@ ruoyi:
   # 版权年份
   copyrightYear: 2024
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
-  profile: /www/ruoyi
+  profile: /www/ruoyi/uploadPath
   # 获取ip地址开关
   addressEnabled: true
   # 验证码类型 math 数字计算 char 字符验证
@@ -75,7 +75,7 @@ spring:
     # 数据库索引
     database: 0
     # 密码
-    password: 370120
+    password: 123456
     # 连接超时时间
     timeout: 10s
     lettuce:
@@ -128,3 +128,7 @@ xss:
   excludes: /system/notice
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
+defaults:
+  password: "123456"
+  userLevel: "2"
+  avatarUrl: "D:/back/static/default.jpg"
