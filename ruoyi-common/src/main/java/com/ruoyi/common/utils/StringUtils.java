@@ -6,6 +6,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.AntPathMatcher;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.core.text.StrFormatter;
@@ -25,6 +28,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
 
     /** 星号 */
     private static final char ASTERISK = '*';
+    private static final Logger log = LoggerFactory.getLogger(StringUtils.class);
 
     /**
      * 获取参数不为空值

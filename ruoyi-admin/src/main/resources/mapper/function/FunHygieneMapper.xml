@@ -6,36 +6,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <resultMap type="FunHygiene" id="FunHygieneResult">
         <result property="id"    column="id"    />
-        <result property="Dormitoryid"    column="Dormitoryid"    />
-        <result property="FirstRank"    column="FirstRank"    />
-        <result property="SecondRank"    column="SecondRank"    />
-        <result property="ThirdRank"    column="ThirdRank"    />
-        <result property="FourthRank"    column="FourthRank"    />
-        <result property="FifthRank"    column="FifthRank"    />
-        <result property="SixthRank"    column="SixthRank"    />
-        <result property="SeventhRank"    column="SeventhRank"    />
-        <result property="EighthRank"    column="EighthRank"    />
-        <result property="NinthRank"    column="NinthRank"    />
-        <result property="TenthRank"    column="TenthRank"    />
-        <result property="EleventhRank"    column="EleventhRank"    />
-        <result property="TwelfthRank"    column="TwelfthRank"    />
-        <result property="ThirteenthRank"    column="ThirteenthRank"    />
-        <result property="FourteenthRank"    column="FourteenthRank"    />
-        <result property="FifteenthRank"    column="FifteenthRank"    />
-        <result property="SixteenthRank"    column="SixteenthRank"    />
-        <result property="SeventeenthRank"    column="SeventeenthRank"    />
-        <result property="EighteenthRank"    column="EighteenthRank"    />
-        <result property="NineteenthRank"    column="NineteenthRank"    />
+        <result property="dormitoryId"    column="dormitory_id"    />
+        <result property="firstRank"    column="first_rank"    />
+        <result property="secondRank"    column="second_rank"    />
+        <result property="thirdRank"    column="third_rank"    />
+        <result property="fourthRank"    column="fourth_rank"    />
+        <result property="fifthRank"    column="fifth_rank"    />
+        <result property="sixthRank"    column="sixth_rank"    />
+        <result property="seventhRank"    column="seventh_rank"    />
+        <result property="eighthRank"    column="eighth_rank"    />
+        <result property="ninthRank"    column="ninth_rank"    />
+        <result property="tenthRank"    column="tenth_rank"    />
+        <result property="eleventhRank"    column="eleventh_rank"    />
+        <result property="twelfthRank"    column="twelfth_rank"    />
+        <result property="thirteenthRank"    column="thirteenth_rank"    />
+        <result property="fourteenthRank"    column="fourteenth_rank"    />
+        <result property="fifteenthRank"    column="fifteenth_rank"    />
+        <result property="sixteenthRank"    column="sixteenth_rank"    />
+        <result property="seventeenthRank"    column="seventeenth_rank"    />
+        <result property="eighteenthRank"    column="eighteenth_rank"    />
+        <result property="nineteenthRank"    column="nineteenth_rank"    />
     </resultMap>
 
     <sql id="selectFunHygieneVo">
-        select id, Dormitoryid, FirstRank, SecondRank, ThirdRank, FourthRank, FifthRank, SixthRank, SeventhRank, EighthRank, NinthRank, TenthRank, EleventhRank, TwelfthRank, ThirteenthRank, FourteenthRank, FifteenthRank, SixteenthRank, SeventeenthRank, EighteenthRank, NineteenthRank from hygiene
+        select id, dormitory_id, first_rank, second_rank, third_rank, fourth_rank, fifth_rank, sixth_rank, seventh_rank, eighth_rank, ninth_rank, tenth_rank, eleventh_rank, twelfth_rank, thirteenth_rank, fourteenth_rank, fifteenth_rank, sixteenth_rank, seventeenth_rank, eighteenth_rank, nineteenth_rank from hygiene_info
     </sql>
 
     <select id="selectFunHygieneList" parameterType="FunHygiene" resultMap="FunHygieneResult">
         <include refid="selectFunHygieneVo"/>
         <where>  
-            <if test="Dormitoryid != null  and Dormitoryid != ''"> and Dormitoryid like concat('%', #{Dormitoryid}, '%')</if>
+            <if test="dormitoryId != null  and dormitoryId != ''"> and dormitory_id = #{dormitoryId}</if>
         </where>
     </select>
     
@@ -45,86 +45,86 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <insert id="insertFunHygiene" parameterType="FunHygiene" useGeneratedKeys="true" keyProperty="id">
-        insert into hygiene
+        insert into hygiene_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="Dormitoryid != null and Dormitoryid != ''">Dormitoryid,</if>
-            <if test="FirstRank != null">FirstRank,</if>
-            <if test="SecondRank != null">SecondRank,</if>
-            <if test="ThirdRank != null">ThirdRank,</if>
-            <if test="FourthRank != null">FourthRank,</if>
-            <if test="FifthRank != null">FifthRank,</if>
-            <if test="SixthRank != null">SixthRank,</if>
-            <if test="SeventhRank != null">SeventhRank,</if>
-            <if test="EighthRank != null">EighthRank,</if>
-            <if test="NinthRank != null">NinthRank,</if>
-            <if test="TenthRank != null">TenthRank,</if>
-            <if test="EleventhRank != null">EleventhRank,</if>
-            <if test="TwelfthRank != null">TwelfthRank,</if>
-            <if test="ThirteenthRank != null">ThirteenthRank,</if>
-            <if test="FourteenthRank != null">FourteenthRank,</if>
-            <if test="FifteenthRank != null">FifteenthRank,</if>
-            <if test="SixteenthRank != null">SixteenthRank,</if>
-            <if test="SeventeenthRank != null">SeventeenthRank,</if>
-            <if test="EighteenthRank != null">EighteenthRank,</if>
-            <if test="NineteenthRank != null">NineteenthRank,</if>
+            <if test="dormitoryId != null and dormitoryId != ''">dormitory_id,</if>
+            <if test="firstRank != null">first_rank,</if>
+            <if test="secondRank != null">second_rank,</if>
+            <if test="thirdRank != null">third_rank,</if>
+            <if test="fourthRank != null">fourth_rank,</if>
+            <if test="fifthRank != null">fifth_rank,</if>
+            <if test="sixthRank != null">sixth_rank,</if>
+            <if test="seventhRank != null">seventh_rank,</if>
+            <if test="eighthRank != null">eighth_rank,</if>
+            <if test="ninthRank != null">ninth_rank,</if>
+            <if test="tenthRank != null">tenth_rank,</if>
+            <if test="eleventhRank != null">eleventh_rank,</if>
+            <if test="twelfthRank != null">twelfth_rank,</if>
+            <if test="thirteenthRank != null">thirteenth_rank,</if>
+            <if test="fourteenthRank != null">fourteenth_rank,</if>
+            <if test="fifteenthRank != null">fifteenth_rank,</if>
+            <if test="sixteenthRank != null">sixteenth_rank,</if>
+            <if test="seventeenthRank != null">seventeenth_rank,</if>
+            <if test="eighteenthRank != null">eighteenth_rank,</if>
+            <if test="nineteenthRank != null">nineteenth_rank,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="Dormitoryid != null and Dormitoryid != ''">#{Dormitoryid},</if>
-            <if test="FirstRank != null">#{FirstRank},</if>
-            <if test="SecondRank != null">#{SecondRank},</if>
-            <if test="ThirdRank != null">#{ThirdRank},</if>
-            <if test="FourthRank != null">#{FourthRank},</if>
-            <if test="FifthRank != null">#{FifthRank},</if>
-            <if test="SixthRank != null">#{SixthRank},</if>
-            <if test="SeventhRank != null">#{SeventhRank},</if>
-            <if test="EighthRank != null">#{EighthRank},</if>
-            <if test="NinthRank != null">#{NinthRank},</if>
-            <if test="TenthRank != null">#{TenthRank},</if>
-            <if test="EleventhRank != null">#{EleventhRank},</if>
-            <if test="TwelfthRank != null">#{TwelfthRank},</if>
-            <if test="ThirteenthRank != null">#{ThirteenthRank},</if>
-            <if test="FourteenthRank != null">#{FourteenthRank},</if>
-            <if test="FifteenthRank != null">#{FifteenthRank},</if>
-            <if test="SixteenthRank != null">#{SixteenthRank},</if>
-            <if test="SeventeenthRank != null">#{SeventeenthRank},</if>
-            <if test="EighteenthRank != null">#{EighteenthRank},</if>
-            <if test="NineteenthRank != null">#{NineteenthRank},</if>
+            <if test="dormitoryId != null and dormitoryId != ''">#{dormitoryId},</if>
+            <if test="firstRank != null">#{firstRank},</if>
+            <if test="secondRank != null">#{secondRank},</if>
+            <if test="thirdRank != null">#{thirdRank},</if>
+            <if test="fourthRank != null">#{fourthRank},</if>
+            <if test="fifthRank != null">#{fifthRank},</if>
+            <if test="sixthRank != null">#{sixthRank},</if>
+            <if test="seventhRank != null">#{seventhRank},</if>
+            <if test="eighthRank != null">#{eighthRank},</if>
+            <if test="ninthRank != null">#{ninthRank},</if>
+            <if test="tenthRank != null">#{tenthRank},</if>
+            <if test="eleventhRank != null">#{eleventhRank},</if>
+            <if test="twelfthRank != null">#{twelfthRank},</if>
+            <if test="thirteenthRank != null">#{thirteenthRank},</if>
+            <if test="fourteenthRank != null">#{fourteenthRank},</if>
+            <if test="fifteenthRank != null">#{fifteenthRank},</if>
+            <if test="sixteenthRank != null">#{sixteenthRank},</if>
+            <if test="seventeenthRank != null">#{seventeenthRank},</if>
+            <if test="eighteenthRank != null">#{eighteenthRank},</if>
+            <if test="nineteenthRank != null">#{nineteenthRank},</if>
          </trim>
     </insert>
 
     <update id="updateFunHygiene" parameterType="FunHygiene">
-        update hygiene
+        update hygiene_info
         <trim prefix="SET" suffixOverrides=",">
-            <if test="Dormitoryid != null and Dormitoryid != ''">Dormitoryid = #{Dormitoryid},</if>
-            <if test="FirstRank != null">FirstRank = #{FirstRank},</if>
-            <if test="SecondRank != null">SecondRank = #{SecondRank},</if>
-            <if test="ThirdRank != null">ThirdRank = #{ThirdRank},</if>
-            <if test="FourthRank != null">FourthRank = #{FourthRank},</if>
-            <if test="FifthRank != null">FifthRank = #{FifthRank},</if>
-            <if test="SixthRank != null">SixthRank = #{SixthRank},</if>
-            <if test="SeventhRank != null">SeventhRank = #{SeventhRank},</if>
-            <if test="EighthRank != null">EighthRank = #{EighthRank},</if>
-            <if test="NinthRank != null">NinthRank = #{NinthRank},</if>
-            <if test="TenthRank != null">TenthRank = #{TenthRank},</if>
-            <if test="EleventhRank != null">EleventhRank = #{EleventhRank},</if>
-            <if test="TwelfthRank != null">TwelfthRank = #{TwelfthRank},</if>
-            <if test="ThirteenthRank != null">ThirteenthRank = #{ThirteenthRank},</if>
-            <if test="FourteenthRank != null">FourteenthRank = #{FourteenthRank},</if>
-            <if test="FifteenthRank != null">FifteenthRank = #{FifteenthRank},</if>
-            <if test="SixteenthRank != null">SixteenthRank = #{SixteenthRank},</if>
-            <if test="SeventeenthRank != null">SeventeenthRank = #{SeventeenthRank},</if>
-            <if test="EighteenthRank != null">EighteenthRank = #{EighteenthRank},</if>
-            <if test="NineteenthRank != null">NineteenthRank = #{NineteenthRank},</if>
+            <if test="dormitoryId != null and dormitoryId != ''">dormitory_id = #{dormitoryId},</if>
+            <if test="firstRank != null">first_rank = #{firstRank},</if>
+            <if test="secondRank != null">second_rank = #{secondRank},</if>
+            <if test="thirdRank != null">third_rank = #{thirdRank},</if>
+            <if test="fourthRank != null">fourth_rank = #{fourthRank},</if>
+            <if test="fifthRank != null">fifth_rank = #{fifthRank},</if>
+            <if test="sixthRank != null">sixth_rank = #{sixthRank},</if>
+            <if test="seventhRank != null">seventh_rank = #{seventhRank},</if>
+            <if test="eighthRank != null">eighth_rank = #{eighthRank},</if>
+            <if test="ninthRank != null">ninth_rank = #{ninthRank},</if>
+            <if test="tenthRank != null">tenth_rank = #{tenthRank},</if>
+            <if test="eleventhRank != null">eleventh_rank = #{eleventhRank},</if>
+            <if test="twelfthRank != null">twelfth_rank = #{twelfthRank},</if>
+            <if test="thirteenthRank != null">thirteenth_rank = #{thirteenthRank},</if>
+            <if test="fourteenthRank != null">fourteenth_rank = #{fourteenthRank},</if>
+            <if test="fifteenthRank != null">fifteenth_rank = #{fifteenthRank},</if>
+            <if test="sixteenthRank != null">sixteenth_rank = #{sixteenthRank},</if>
+            <if test="seventeenthRank != null">seventeenth_rank = #{seventeenthRank},</if>
+            <if test="eighteenthRank != null">eighteenth_rank = #{eighteenthRank},</if>
+            <if test="nineteenthRank != null">nineteenth_rank = #{nineteenthRank},</if>
         </trim>
         where id = #{id}
     </update>
 
     <delete id="deleteFunHygieneById" parameterType="Long">
-        delete from hygiene where id = #{id}
+        delete from hygiene_info where id = #{id}
     </delete>
 
     <delete id="deleteFunHygieneByIds" parameterType="String">
-        delete from hygiene where id in 
+        delete from hygiene_info where id in 
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

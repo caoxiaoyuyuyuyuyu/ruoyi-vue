@@ -10,8 +10,8 @@ import com.ruoyi.function.service.IFunHygieneService;
 /**
  * 卫检成绩Service业务层处理
  * 
- * @author zhenzhen
- * @date 2024-08-28
+ * @author xiaou
+ * @date 2024-09-13
  */
 @Service
 public class FunHygieneServiceImpl implements IFunHygieneService 

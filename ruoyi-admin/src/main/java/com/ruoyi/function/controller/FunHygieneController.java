@@ -24,8 +24,8 @@ import com.ruoyi.common.core.page.TableDataInfo;
 /**
  * 卫检成绩Controller
  * 
- * @author zhenzhen
- * @date 2024-08-28
+ * @author xiaou
+ * @date 2024-09-13
  */
 @RestController
 @RequestMapping("/function/fun_hygiene")

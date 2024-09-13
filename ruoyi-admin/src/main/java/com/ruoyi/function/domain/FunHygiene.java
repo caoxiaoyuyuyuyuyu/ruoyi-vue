@@ -6,10 +6,10 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * 卫检成绩对象 hygiene
+ * 卫检成绩对象 hygiene_info
  * 
- * @author zhenzhen
- * @date 2024-08-28
+ * @author xiaou
+ * @date 2024-09-13
  */
 public class FunHygiene extends BaseEntity
 {
@@ -20,83 +20,83 @@ public class FunHygiene extends BaseEntity
 
     /** 宿舍 */
     @Excel(name = "宿舍")
-    private String Dormitoryid;
+    private String dormitoryId;
 
     /** 第一周成绩 */
     @Excel(name = "第一周成绩")
-    private String FirstRank;
+    private String firstRank;
 
     /** 第二周成绩 */
     @Excel(name = "第二周成绩")
-    private String SecondRank;
+    private String secondRank;
 
     /** 第三周成绩 */
     @Excel(name = "第三周成绩")
-    private String ThirdRank;
+    private String thirdRank;
 
     /** 第四周成绩 */
     @Excel(name = "第四周成绩")
-    private String FourthRank;
+    private String fourthRank;
 
     /** 第五周成绩 */
     @Excel(name = "第五周成绩")
-    private String FifthRank;
+    private String fifthRank;
 
     /** 第六周成绩 */
     @Excel(name = "第六周成绩")
-    private String SixthRank;
+    private String sixthRank;
 
     /** 第七周成绩 */
     @Excel(name = "第七周成绩")
-    private String SeventhRank;
+    private String seventhRank;
 
     /** 第八周成绩 */
     @Excel(name = "第八周成绩")
-    private String EighthRank;
+    private String eighthRank;
 
     /** 第九周成绩 */
     @Excel(name = "第九周成绩")
-    private String NinthRank;
+    private String ninthRank;
 
     /** 第十周成绩 */
     @Excel(name = "第十周成绩")
-    private String TenthRank;
+    private String tenthRank;
 
     /** 第十一周成绩 */
     @Excel(name = "第十一周成绩")
-    private String EleventhRank;
+    private String eleventhRank;
 
     /** 第十二周成绩 */
     @Excel(name = "第十二周成绩")
-    private String TwelfthRank;
+    private String twelfthRank;
 
     /** 第十三周成绩 */
     @Excel(name = "第十三周成绩")
-    private String ThirteenthRank;
+    private String thirteenthRank;
 
     /** 第十四周成绩 */
     @Excel(name = "第十四周成绩")
-    private String FourteenthRank;
+    private String fourteenthRank;
 
     /** 第十五周成绩 */
     @Excel(name = "第十五周成绩")
-    private String FifteenthRank;
+    private String fifteenthRank;
 
     /** 第十六周成绩 */
     @Excel(name = "第十六周成绩")
-    private String SixteenthRank;
+    private String sixteenthRank;
 
     /** 第十七周成绩 */
     @Excel(name = "第十七周成绩")
-    private String SeventeenthRank;
+    private String seventeenthRank;
 
     /** 第十八周成绩 */
     @Excel(name = "第十八周成绩")
-    private String EighteenthRank;
+    private String eighteenthRank;
 
     /** 第十九周成绩 */
     @Excel(name = "第十九周成绩")
-    private String NineteenthRank;
+    private String nineteenthRank;
 
     public void setId(Long id) 
     {
@@ -107,211 +107,211 @@ public class FunHygiene extends BaseEntity
     {
         return id;
     }
-    public void setDormitoryid(String Dormitoryid) 
+    public void setDormitoryId(String dormitoryId) 
     {
-        this.Dormitoryid = Dormitoryid;
+        this.dormitoryId = dormitoryId;
     }
 
-    public String getDormitoryid() 
+    public String getDormitoryId() 
     {
-        return Dormitoryid;
+        return dormitoryId;
     }
-    public void setFirstRank(String FirstRank) 
+    public void setFirstRank(String firstRank) 
     {
-        this.FirstRank = FirstRank;
+        this.firstRank = firstRank;
     }
 
     public String getFirstRank() 
     {
-        return FirstRank;
+        return firstRank;
     }
-    public void setSecondRank(String SecondRank) 
+    public void setSecondRank(String secondRank) 
     {
-        this.SecondRank = SecondRank;
+        this.secondRank = secondRank;
     }
 
     public String getSecondRank() 
     {
-        return SecondRank;
+        return secondRank;
     }
-    public void setThirdRank(String ThirdRank) 
+    public void setThirdRank(String thirdRank) 
     {
-        this.ThirdRank = ThirdRank;
+        this.thirdRank = thirdRank;
     }
 
     public String getThirdRank() 
     {
-        return ThirdRank;
+        return thirdRank;
     }
-    public void setFourthRank(String FourthRank) 
+    public void setFourthRank(String fourthRank) 
     {
-        this.FourthRank = FourthRank;
+        this.fourthRank = fourthRank;
     }
 
     public String getFourthRank() 
     {
-        return FourthRank;
+        return fourthRank;
     }
-    public void setFifthRank(String FifthRank) 
+    public void setFifthRank(String fifthRank) 
     {
-        this.FifthRank = FifthRank;
+        this.fifthRank = fifthRank;
     }
 
     public String getFifthRank() 
     {
-        return FifthRank;
+        return fifthRank;
     }
-    public void setSixthRank(String SixthRank) 
+    public void setSixthRank(String sixthRank) 
     {
-        this.SixthRank = SixthRank;
+        this.sixthRank = sixthRank;
     }
 
     public String getSixthRank() 
     {
-        return SixthRank;
+        return sixthRank;
     }
-    public void setSeventhRank(String SeventhRank) 
+    public void setSeventhRank(String seventhRank) 
     {
-        this.SeventhRank = SeventhRank;
+        this.seventhRank = seventhRank;
     }
 
     public String getSeventhRank() 
     {
-        return SeventhRank;
+        return seventhRank;
     }
-    public void setEighthRank(String EighthRank) 
+    public void setEighthRank(String eighthRank) 
     {
-        this.EighthRank = EighthRank;
+        this.eighthRank = eighthRank;
     }
 
     public String getEighthRank() 
     {
-        return EighthRank;
+        return eighthRank;
     }
-    public void setNinthRank(String NinthRank) 
+    public void setNinthRank(String ninthRank) 
     {
-        this.NinthRank = NinthRank;
+        this.ninthRank = ninthRank;
     }
 
     public String getNinthRank() 
     {
-        return NinthRank;
+        return ninthRank;
     }
-    public void setTenthRank(String TenthRank) 
+    public void setTenthRank(String tenthRank) 
     {
-        this.TenthRank = TenthRank;
+        this.tenthRank = tenthRank;
     }
 
     public String getTenthRank() 
     {
-        return TenthRank;
+        return tenthRank;
     }
-    public void setEleventhRank(String EleventhRank) 
+    public void setEleventhRank(String eleventhRank) 
     {
-        this.EleventhRank = EleventhRank;
+        this.eleventhRank = eleventhRank;
     }
 
     public String getEleventhRank() 
     {
-        return EleventhRank;
+        return eleventhRank;
     }
-    public void setTwelfthRank(String TwelfthRank) 
+    public void setTwelfthRank(String twelfthRank) 
     {
-        this.TwelfthRank = TwelfthRank;
+        this.twelfthRank = twelfthRank;
     }
 
     public String getTwelfthRank() 
     {
-        return TwelfthRank;
+        return twelfthRank;
     }
-    public void setThirteenthRank(String ThirteenthRank) 
+    public void setThirteenthRank(String thirteenthRank) 
     {
-        this.ThirteenthRank = ThirteenthRank;
+        this.thirteenthRank = thirteenthRank;
     }
 
     public String getThirteenthRank() 
     {
-        return ThirteenthRank;
+        return thirteenthRank;
     }
-    public void setFourteenthRank(String FourteenthRank) 
+    public void setFourteenthRank(String fourteenthRank) 
     {
-        this.FourteenthRank = FourteenthRank;
+        this.fourteenthRank = fourteenthRank;
     }
 
     public String getFourteenthRank() 
     {
-        return FourteenthRank;
+        return fourteenthRank;
     }
-    public void setFifteenthRank(String FifteenthRank) 
+    public void setFifteenthRank(String fifteenthRank) 
     {
-        this.FifteenthRank = FifteenthRank;
+        this.fifteenthRank = fifteenthRank;
     }
 
     public String getFifteenthRank() 
     {
-        return FifteenthRank;
+        return fifteenthRank;
     }
-    public void setSixteenthRank(String SixteenthRank) 
+    public void setSixteenthRank(String sixteenthRank) 
     {
-        this.SixteenthRank = SixteenthRank;
+        this.sixteenthRank = sixteenthRank;
     }
 
     public String getSixteenthRank() 
     {
-        return SixteenthRank;
+        return sixteenthRank;
     }
-    public void setSeventeenthRank(String SeventeenthRank) 
+    public void setSeventeenthRank(String seventeenthRank) 
     {
-        this.SeventeenthRank = SeventeenthRank;
+        this.seventeenthRank = seventeenthRank;
     }
 
     public String getSeventeenthRank() 
     {
-        return SeventeenthRank;
+        return seventeenthRank;
     }
-    public void setEighteenthRank(String EighteenthRank) 
+    public void setEighteenthRank(String eighteenthRank) 
     {
-        this.EighteenthRank = EighteenthRank;
+        this.eighteenthRank = eighteenthRank;
     }
 
     public String getEighteenthRank() 
     {
-        return EighteenthRank;
+        return eighteenthRank;
     }
-    public void setNineteenthRank(String NineteenthRank) 
+    public void setNineteenthRank(String nineteenthRank) 
     {
-        this.NineteenthRank = NineteenthRank;
+        this.nineteenthRank = nineteenthRank;
     }
 
     public String getNineteenthRank() 
     {
-        return NineteenthRank;
+        return nineteenthRank;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
-            .append("Dormitoryid", getDormitoryid())
-            .append("FirstRank", getFirstRank())
-            .append("SecondRank", getSecondRank())
-            .append("ThirdRank", getThirdRank())
-            .append("FourthRank", getFourthRank())
-            .append("FifthRank", getFifthRank())
-            .append("SixthRank", getSixthRank())
-            .append("SeventhRank", getSeventhRank())
-            .append("EighthRank", getEighthRank())
-            .append("NinthRank", getNinthRank())
-            .append("TenthRank", getTenthRank())
-            .append("EleventhRank", getEleventhRank())
-            .append("TwelfthRank", getTwelfthRank())
-            .append("ThirteenthRank", getThirteenthRank())
-            .append("FourteenthRank", getFourteenthRank())
-            .append("FifteenthRank", getFifteenthRank())
-            .append("SixteenthRank", getSixteenthRank())
-            .append("SeventeenthRank", getSeventeenthRank())
-            .append("EighteenthRank", getEighteenthRank())
-            .append("NineteenthRank", getNineteenthRank())
+            .append("dormitoryId", getDormitoryId())
+            .append("firstRank", getFirstRank())
+            .append("secondRank", getSecondRank())
+            .append("thirdRank", getThirdRank())
+            .append("fourthRank", getFourthRank())
+            .append("fifthRank", getFifthRank())
+            .append("sixthRank", getSixthRank())
+            .append("seventhRank", getSeventhRank())
+            .append("eighthRank", getEighthRank())
+            .append("ninthRank", getNinthRank())
+            .append("tenthRank", getTenthRank())
+            .append("eleventhRank", getEleventhRank())
+            .append("twelfthRank", getTwelfthRank())
+            .append("thirteenthRank", getThirteenthRank())
+            .append("fourteenthRank", getFourteenthRank())
+            .append("fifteenthRank", getFifteenthRank())
+            .append("sixteenthRank", getSixteenthRank())
+            .append("seventeenthRank", getSeventeenthRank())
+            .append("eighteenthRank", getEighteenthRank())
+            .append("nineteenthRank", getNineteenthRank())
             .toString();
     }
 }

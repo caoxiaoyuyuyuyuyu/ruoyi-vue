@@ -9,8 +9,8 @@ import com.ruoyi.function.domain.FunHygiene;
 /**
  * 卫检成绩Mapper接口
  * 
- * @author zhenzhen
- * @date 2024-08-28
+ * @author xiaou
+ * @date 2024-09-13
  */
 @DataSource(value = DataSourceType.SLAVE)
 public interface FunHygieneMapper 

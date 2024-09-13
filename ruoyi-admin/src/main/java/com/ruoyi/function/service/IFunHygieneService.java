@@ -6,8 +6,8 @@ import com.ruoyi.function.domain.FunHygiene;
 /**
  * 卫检成绩Service接口
  * 
- * @author zhenzhen
- * @date 2024-08-28
+ * @author xiaou
+ * @date 2024-09-13
  */
 public interface IFunHygieneService 
 {
