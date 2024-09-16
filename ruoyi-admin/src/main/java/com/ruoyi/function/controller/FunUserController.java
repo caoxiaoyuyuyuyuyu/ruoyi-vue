@@ -122,4 +122,13 @@ public class FunUserController extends BaseController
     {
         return toAjax(funUserService.deleteFunUserByIds(ids));
     }
+
+    //根据学号返回所有信息，除了密码
+    @GetMapping("/getUserInfo/{userId}")
+    public AjaxResult getUserInfo(@PathVariable String userId)
+    {
+        System.out.println("userId:"+userId);
+        return success(funUserService.getUserInfo(userId));
+    }
+
 }

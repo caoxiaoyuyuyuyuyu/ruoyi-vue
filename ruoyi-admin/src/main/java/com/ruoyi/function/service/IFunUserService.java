@@ -69,4 +69,5 @@ public interface IFunUserService
      */
     public String importUser(List<FunUser> userList, Boolean isUpdateSupport);
 
+    FunUser getUserInfo(String userId);
 }

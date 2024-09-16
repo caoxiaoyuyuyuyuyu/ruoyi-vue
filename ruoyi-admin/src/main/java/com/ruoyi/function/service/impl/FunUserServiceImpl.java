@@ -180,4 +180,13 @@ public class FunUserServiceImpl implements IFunUserService
         return successMsg.toString();
     }
 
+    @Override
+    public FunUser getUserInfo(String userId) {
+        FunUser user = funUserMapper.selectFunUserByUserid(userId);
+        if(user!=null){
+            user.setPassword("");
+        }
+        return user;
+    }
+
 }

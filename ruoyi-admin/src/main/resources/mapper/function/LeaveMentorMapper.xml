@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.function.mapper.LeaveMentorMapper">
+
+    <resultMap type="LeaveMentor" id="LeaveMentorResult">
+        <result property="id"    column="id"    />
+        <result property="postId"    column="post_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="mentorId"    column="mentor_id"    />
+        <result property="courseName"    column="course_name"    />
+        <result property="courseSTime"    column="course_s_time"    />
+        <result property="courseETime"    column="course_e_time"    />
+        <result property="createdAt"    column="created_at"    />
+        <result property="updatedAt"    column="updated_at"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectLeaveMentorVo">
+        select id, post_id, user_id, mentor_id, course_name, course_s_time, course_e_time, created_at, updated_at, status from leave_mentor
+    </sql>
+
+    <select id="selectLeaveMentorList" parameterType="LeaveMentor" resultMap="LeaveMentorResult">
+        <include refid="selectLeaveMentorVo"/>
+        <where>
+            <if test="postId != null "> and post_id = #{postId}</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="mentorId != null  and mentorId != ''"> and mentor_id = #{mentorId}</if>
+            <if test="courseName != null  and courseName != ''"> and course_name like concat('%', #{courseName}, '%')</if>
+            <if test="courseSTime != null  and courseSTime != ''"> and course_s_time = #{courseSTime}</if>
+            <if test="courseETime != null  and courseETime != ''"> and course_e_time = #{courseETime}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+
+    <select id="selectLeaveMentorById" parameterType="Long" resultMap="LeaveMentorResult">
+        <include refid="selectLeaveMentorVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertLeaveMentor" parameterType="LeaveMentor" useGeneratedKeys="true" keyProperty="id">
+        insert into leave_mentor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="postId != null">post_id,</if>
+            <if test="userId != null and userId != ''">user_id,</if>
+            <if test="mentorId != null and mentorId != ''">mentor_id,</if>
+            <if test="courseName != null">course_name,</if>
+            <if test="courseSTime != null">course_s_time,</if>
+            <if test="courseETime != null">course_e_time,</if>
+            <if test="createdAt != null">created_at,</if>
+            <if test="updatedAt != null">updated_at,</if>
+            <if test="status != null">status,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="postId != null">#{postId},</if>
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="mentorId != null and mentorId != ''">#{mentorId},</if>
+            <if test="courseName != null">#{courseName},</if>
+            <if test="courseSTime != null">#{courseSTime},</if>
+            <if test="courseETime != null">#{courseETime},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+            <if test="updatedAt != null">#{updatedAt},</if>
+            <if test="status != null">#{status},</if>
+        </trim>
+    </insert>
+
+    <update id="updateLeaveMentor" parameterType="LeaveMentor">
+        update leave_mentor
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="postId != null">post_id = #{postId},</if>
+            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="mentorId != null and mentorId != ''">mentor_id = #{mentorId},</if>
+            <if test="courseName != null">course_name = #{courseName},</if>
+            <if test="courseSTime != null">course_s_time = #{courseSTime},</if>
+            <if test="courseETime != null">course_e_time = #{courseETime},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+            <if test="updatedAt != null">updated_at = #{updatedAt},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteLeaveMentorById" parameterType="Long">
+        delete from leave_mentor where id = #{id}
+    </delete>
+
+    <delete id="deleteLeaveMentorByIds" parameterType="String">
+        delete from leave_mentor where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
